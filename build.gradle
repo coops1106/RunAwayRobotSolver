@@ -1,0 +1,21 @@
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'eclipse'
+
+repositories {
+    mavenCentral()
+}
+
+eclipse {
+    project {
+        natures += 'org.springframework.ide.eclipse.core.springnature'
+    }
+}
+
+dependencies {
+	//Required for application context
+	compile "org.springframework:spring-context:$springVersion"
+	
+	//Required for junit
+    testCompile "junit:junit:$junitVersion"
+}

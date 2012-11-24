@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite errors="0" failures="0" hostname="Frank" name="org.hangfire.daco.SolutionTest" tests="1" time="0.504" timestamp="2012-11-24T15:06:01">
+  <properties />
+  <testcase classname="org.hangfire.daco.SolutionTest" name="testContextAvailable" time="0.431" />
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[24-Nov-2012 15:06:01 org.springframework.context.support.AbstractApplicationContext prepareRefresh
+INFO: Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@1581593: startup date [Sat Nov 24 15:06:01 GMT 2012]; root of context hierarchy
+24-Nov-2012 15:06:01 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [application-context.xml]
+24-Nov-2012 15:06:01 org.springframework.beans.factory.support.DefaultListableBeanFactory preInstantiateSingletons
+INFO: Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@55bb93: defining beans []; root of factory hierarchy
+]]></system-err>
+</testsuite>
