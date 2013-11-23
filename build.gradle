@@ -1,27 +1,17 @@
 apply plugin: "groovy"
 apply plugin: 'java'
 apply plugin: 'application'
-apply plugin: 'eclipse'
+apply plugin: 'idea'
 
 repositories {
     mavenCentral()
-	maven { url "http://oss.sonatype.org/content/repositories/snapshots/" }
-}
-
-eclipse {
-    project {
-        natures += 'org.springframework.ide.eclipse.core.springnature'
-    }
 }
 
 dependencies {
-	//Required for Spring application context
 	compile "org.springframework:spring-context:$springVersion"
-	
-	//Required for junit
+	compile 'org.spockframework:spock-core:0.7-groovy-2.0'
+    compile 'commons-lang:commons-lang:2.3'
+
+    testCompile 'org.mockito:mockito-all:1.8.4'
     testCompile "junit:junit:$junitVersion"
-    
-	// mandatory dependencies for using Spock
-    groovy "org.codehaus.groovy:groovy-all:2.0.5"
-	testCompile "org.spockframework:spock-core:1.0-groovy-2.0-SNAPSHOT"
 }

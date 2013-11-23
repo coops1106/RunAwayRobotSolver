@@ -2,6 +2,7 @@ package org.hangfire.problem;
 
 public class Tile {
 
+    //TODO Refactor to Enum
 	public static final int EMPTY = 0;
 	public static final int BLOCKED = 1;
 	
@@ -19,17 +20,14 @@ public class Tile {
 		this.status = status;
 	}
 
-	@Override
 	public String toString() {
 		if (this.status == 0) {
 			return "" + Tile.EMPTY;
 		} else {
 			return "" + Tile.BLOCKED;
 		}
-		
 	}
 
-	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -37,7 +35,6 @@ public class Tile {
 		return result;
 	}
 
-	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -50,5 +47,4 @@ public class Tile {
 			return false;
 		return true;
 	}
-	
 }
