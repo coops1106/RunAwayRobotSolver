@@ -1,7 +1,10 @@
 .classpath
-.gradle
 .metadata
 .project
 .settings
 bin
 build
+*.class
+*.jar
+*.war
+*.ear
