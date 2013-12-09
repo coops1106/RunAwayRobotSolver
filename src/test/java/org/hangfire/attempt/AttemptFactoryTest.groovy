@@ -1,5 +1,7 @@
 package org.hangfire.attempt
+
 import org.hangfire.RunAwayRobotTest
+import static org.hangfire.attempt.Instruction.*
 
 class AttemptFactoryTest extends RunAwayRobotTest {
 
@@ -8,6 +10,22 @@ class AttemptFactoryTest extends RunAwayRobotTest {
         def attempt = AttemptFactory.defaultAttemptOfSize(8)
         then: "then I get an attempt with correct instructions"
         attempt.instructions.containsAll(Instruction.RIGHT)
+    }
+
+    def "Test getFirstRIGHTPreBoomPoint"() {
+        given:
+        def Attempt attempt = new Attempt()
+        attempt.instructions = instructions
+        attempt.boomPoint = boomPoint
+        when:
+        def result = AttemptFactory.getFirstRIGHTPreBoomPoint(attempt)
+        then:
+        result == expectedResult
+        where:
+        instructions   | boomPoint | expectedResult
+        [RIGHT, RIGHT] | 2         | 1
+        [RIGHT, DOWN]  | 4         | 0
+        [DOWN, RIGHT]  | 1         | -1
     }
 
     def "test2"() {
@@ -23,12 +41,13 @@ class AttemptFactoryTest extends RunAwayRobotTest {
         alternativeAttempt.valid == valid
 
         where:
-        currentInstruction                                                                                                                                       | boomPoint | expectedInstruction                                                                                                                                     | valid
-        [Instruction.RIGHT, Instruction.RIGHT, Instruction.RIGHT, Instruction.RIGHT, Instruction.RIGHT, Instruction.RIGHT, Instruction.RIGHT, Instruction.RIGHT] | 5         | [Instruction.RIGHT, Instruction.RIGHT, Instruction.RIGHT, Instruction.RIGHT, Instruction.DOWN, Instruction.RIGHT, Instruction.RIGHT, Instruction.RIGHT] | true
-        [Instruction.RIGHT, Instruction.RIGHT, Instruction.RIGHT, Instruction.RIGHT, Instruction.DOWN, Instruction.RIGHT, Instruction.RIGHT, Instruction.RIGHT]  | 4         | [Instruction.RIGHT, Instruction.RIGHT, Instruction.RIGHT, Instruction.DOWN, Instruction.RIGHT, Instruction.RIGHT, Instruction.RIGHT, Instruction.RIGHT] | true
-        [Instruction.RIGHT, Instruction.RIGHT, Instruction.RIGHT, Instruction.DOWN, Instruction.DOWN, Instruction.RIGHT, Instruction.RIGHT, Instruction.RIGHT]   | 3         | [Instruction.RIGHT, Instruction.RIGHT, Instruction.DOWN, Instruction.RIGHT, Instruction.RIGHT, Instruction.RIGHT, Instruction.RIGHT, Instruction.RIGHT] | true
-        [Instruction.RIGHT, Instruction.RIGHT, Instruction.DOWN, Instruction.DOWN, Instruction.DOWN, Instruction.RIGHT, Instruction.RIGHT, Instruction.RIGHT]    | 3         | [Instruction.RIGHT, Instruction.DOWN, Instruction.RIGHT, Instruction.RIGHT, Instruction.RIGHT, Instruction.RIGHT, Instruction.RIGHT, Instruction.RIGHT] | true
-        [Instruction.RIGHT, Instruction.DOWN, Instruction.DOWN, Instruction.DOWN, Instruction.DOWN, Instruction.RIGHT, Instruction.RIGHT, Instruction.RIGHT]     | 2         | [Instruction.DOWN, Instruction.RIGHT, Instruction.RIGHT, Instruction.RIGHT, Instruction.RIGHT, Instruction.RIGHT, Instruction.RIGHT, Instruction.RIGHT] | true
-        [Instruction.DOWN, Instruction.RIGHT, Instruction.DOWN, Instruction.DOWN, Instruction.DOWN, Instruction.RIGHT, Instruction.RIGHT, Instruction.RIGHT]     | 1         | null                                                                                                                                                    | false
+        currentInstruction                                       | boomPoint | expectedInstruction                                     | valid
+        [RIGHT, RIGHT]                                           | 3         | [RIGHT, DOWN]                                            | true
+        /*[RIGHT, RIGHT, RIGHT, RIGHT, RIGHT, RIGHT, RIGHT, RIGHT] | 5         | [RIGHT, RIGHT, RIGHT, RIGHT, DOWN, RIGHT, RIGHT, RIGHT] | true
+        [RIGHT, RIGHT, RIGHT, RIGHT, DOWN, RIGHT, RIGHT, RIGHT]  | 4         | [RIGHT, RIGHT, RIGHT, DOWN, RIGHT, RIGHT, RIGHT, RIGHT] | true
+        [RIGHT, RIGHT, RIGHT, DOWN, DOWN, RIGHT, RIGHT, RIGHT]   | 3         | [RIGHT, RIGHT, DOWN, RIGHT, RIGHT, RIGHT, RIGHT, RIGHT] | true
+        [RIGHT, RIGHT, DOWN, DOWN, DOWN, RIGHT, RIGHT, RIGHT]    | 3         | [RIGHT, DOWN, RIGHT, RIGHT, RIGHT, RIGHT, RIGHT, RIGHT] | true
+        [RIGHT, DOWN, DOWN, DOWN, DOWN, RIGHT, RIGHT, RIGHT]     | 2         | [DOWN, RIGHT, RIGHT, RIGHT, RIGHT, RIGHT, RIGHT, RIGHT] | true
+        [DOWN, RIGHT, DOWN, DOWN, DOWN, RIGHT, RIGHT, RIGHT]     | 1         | null                                                    | false*/
     }
 }

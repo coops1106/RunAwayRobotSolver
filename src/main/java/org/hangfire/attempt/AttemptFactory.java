@@ -12,20 +12,33 @@ public class AttemptFactory {
             instructions.add(Instruction.RIGHT);
         }
         attempt.setInstructions(instructions);
+        attempt.setValid(true);
         return attempt;
     }
 
     public static Attempt createAlternativeAttempt(final Attempt originalAttempt) {
         Attempt attempt = new Attempt();
-        List<Instruction> newInstructions = originalAttempt.getInstructionsUpToBoomPoint();
-        try {
+        int boomInstruction = getFirstRightPreBoomPoint(originalAttempt);
+        if (boomInstruction != -1) {
+            List<Instruction> newInstructions = new ArrayList<Instruction>(originalAttempt.getInstructions().subList(0, boomInstruction+1));
             newInstructions = changeInstructions(newInstructions);
             completeListWithInstructionRight(newInstructions, originalAttempt.getSize());
             attempt.setInstructions(newInstructions);
-        } catch (ArrayIndexOutOfBoundsException AIOOBE) {
-            attempt.setValid(false);
+            attempt.setValid(true);
         }
         return attempt;
+    }
+
+    protected static int getFirstRightPreBoomPoint(final Attempt originalAttempt) {
+        int boomPoint = originalAttempt.getBoomPoint();
+        while(boomPoint > 0) {
+            boomPoint--;
+            int instructionPoint = boomPoint%originalAttempt.getSize();
+            if (originalAttempt.instructionAt(instructionPoint) == Instruction.RIGHT) {
+                return instructionPoint;
+            }
+        }
+        return -1;
     }
 
     private static List<Instruction> completeListWithInstructionRight(List<Instruction> instructions, int size) {
@@ -33,10 +46,6 @@ public class AttemptFactory {
             instructions.add(Instruction.RIGHT);
         }
         return instructions;
-    }
-
-    private static List<Instruction> copyOriginalAttemptInstructionsPreBoomPoint(final Attempt originalAttempt) {
-        return originalAttempt.getInstructionsUpToBoomPoint();
     }
 
     private static List<Instruction> changeInstructions(final List<Instruction> instructions) throws ArrayIndexOutOfBoundsException {

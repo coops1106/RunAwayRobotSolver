@@ -29,8 +29,12 @@ public class PuzzleMap {
 		}
 	}
 
+    public int getSize() {
+        return this.rows.size();
+    }
+
     public Tile getTileAt(int column, int row) {
-        return this.rows.get(row-1).getTiles().get(column-1);
+        return this.rows.get(row).getTiles().get(column);
     }
 
 	public class RowOfTiles {
