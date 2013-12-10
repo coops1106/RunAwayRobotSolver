@@ -9,9 +9,9 @@ repositories {
 
 dependencies {
 	compile "org.springframework:spring-context:$springVersion"
-	compile 'org.spockframework:spock-core:0.7-groovy-2.0'
-    compile 'commons-lang:commons-lang:2.3'
+	compile "org.spockframework:spock-core:$spockVersion"
+    compile "commons-lang:commons-lang:$commonsLangVersion"
 
-    testCompile 'org.mockito:mockito-all:1.8.4'
+    testCompile "org.mockito:mockito-all:$mockitoVersion"
     testCompile "junit:junit:$junitVersion"
 }
