@@ -1,33 +1,33 @@
 package org.hangfire.attempt
-
 import org.hangfire.RunAwayRobotTest
 import spock.lang.Ignore
 
-import static org.hangfire.attempt.Instruction.*
-
 class AttemptFactoryTest extends RunAwayRobotTest {
 
-    def "defaultAttemptAreAllRights"() {
+    def "defaultAttemptAreAllUps"() {
         when: "I need a default attempt of size ?"
         def attempt = AttemptFactory.defaultAttemptOfSize(8)
         then: "then I get an attempt with correct instructions"
-        attempt.instructions.containsAll(Instruction.RIGHT)
+        attempt.instructions.containsAll(Instruction.UP)
+        attempt.size == 8
     }
 
     def "First Right Pre BoomPoint"() {
-        given:
-        def Attempt attempt = new Attempt()
-        attempt.instructions = instructions
-        attempt.boomPoint = boomPoint
+        given: "An Attempt"
+            def Attempt attempt = new Attempt()
+        and: "instructions"
+            attempt.instructions = instructions
+        and: "A boom point"
+            attempt.boomPoint = boomPoint
         when:
-        def result = AttemptFactory.getFirstRightPreBoomPoint(attempt)
+            def result = AttemptFactory.getFirstUpPreBoomPoint(attempt)
         then:
         result == expectedResult
         where:
-        instructions   | boomPoint | expectedResult
-        [RIGHT, RIGHT] | 2         | 1
-        [RIGHT, DOWN]  | 4         | 0
-        [DOWN, RIGHT]  | 1         | -1
+        instructions    | boomPoint | expectedResult
+        [UP, UP]        | 2         | 1
+        [UP, LEF]       | 4         | 0
+        [LEFT, UP]      | 1         | -1
     }
 
     @Ignore

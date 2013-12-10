@@ -1,7 +1,9 @@
 package org.hangfire.problem;
 
-import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.ReflectionToStringBuilder;
+
+import java.awt.*;
 
 public class PuzzleMap {
 	
@@ -32,6 +34,10 @@ public class PuzzleMap {
 
     public boolean isBoomAt(int x, int y) {
         return this.map[x][y];
+    }
+
+    public boolean isBoomAt(Point point) {
+        return isBoomAt(point.x, point.y);
     }
 
 	@Override

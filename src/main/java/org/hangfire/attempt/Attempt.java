@@ -5,7 +5,7 @@ import java.util.List;
 public class Attempt {
     private List<Instruction> instructions;
     private boolean valid;
-    private int boomPoint;
+    private int boomPoint = -1;
     private AttemptOutcome attemptOutcome = AttemptOutcome.UNABLE_TO_SOLVE;
 
     public int getSize() {

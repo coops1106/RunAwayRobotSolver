@@ -1,17 +1,34 @@
 package org.hangfire.problemSolver;
 
-import org.hangfire.attempt.Attempt;
-import org.hangfire.attempt.AttemptFactory;
-import org.hangfire.attempt.AttemptOutcome;
-import org.hangfire.attempt.Instruction;
+import org.hangfire.attempt.*;
 import org.hangfire.problem.Problem;
+import org.hangfire.problem.ProblemUtils;
 import org.hangfire.problem.PuzzleMap;
+import org.hangfire.problem.PuzzleMapUtils;
+
+import java.awt.*;
+import java.util.List;
+import java.util.Map;
 
 public class ProblemSolver {
 	
     private PuzzleMap puzzleMap;
+    private static final AttemptFactory ATTEMPT_FACTORY = new AttemptFactory();
+    private static final AttemptChecker ATTEMPT_CHECKER = new AttemptChecker();
 
-    public Attempt solve(final Problem problem) {
+    public void solve(final Problem problem) {
+
+        Map<Integer, List<Point>> startingPointsByInstructionLength = ProblemUtils.fetchStartingPoints(problem);
+
+        for (Integer instructionLength : startingPointsByInstructionLength.keySet()) {
+            for (Point point : startingPointsByInstructionLength.get(instructionLength)) {
+                PuzzleMap condensedPuzzleMap = PuzzleMapUtils.condensePuzzleMap(problem.getPuzzleMap(), point);
+                Attempt attempt = ATTEMPT_FACTORY.defaultAttemptOfSize(instructionLength);
+                attempt = ATTEMPT_CHECKER.check(condensedPuzzleMap, point, attempt);
+                System.out.println(attempt);
+            }
+        }
+/*
         this.puzzleMap = problem.getPuzzleMap();
         Attempt attempt = new Attempt();
 
@@ -24,10 +41,10 @@ public class ProblemSolver {
                 break;
             }
         }
-        return attempt;
+        return attempt;*/
     }
 
-    private Attempt attemptSolutionForSize(final int instructionSize) {
+/*    private Attempt attemptSolutionForSize(final int instructionSize) {
         Attempt attempt = AttemptFactory.defaultAttemptOfSize(instructionSize);
         while (attempt.isValid()) {
             if (checkAttempt(attempt, puzzleMap).getAttemptOutcome() == AttemptOutcome.SOLVED) {
@@ -41,36 +58,8 @@ public class ProblemSolver {
     }
 
     protected Attempt checkAttempt(final Attempt attempt, final PuzzleMap puzzleMap) {
-        System.out.println("Checking attempt :" + attempt);
-        int x = 0;
-        int y = 0;
-        int i = 0;
-        final int size = puzzleMap.getSize();
-        while(attempt.getAttemptOutcome() != AttemptOutcome.SOLVED) {
-            int instructionPoint = i%(attempt.getSize());
-            Instruction instruction = attempt.instructionAt(instructionPoint);
-            if(instruction == Instruction.RIGHT) {
-                x++;
-                if(x==size) {
-                    attempt.setAttemptOutcome(AttemptOutcome.SOLVED);
-                    break;
-                }
-            } else if (instruction == Instruction.DOWN) {
-                y++;
-                if(y==size) {
-                    attempt.setAttemptOutcome(AttemptOutcome.SOLVED);
-                    break;
-                }
-            }
 
-            if (puzzleMap.isBoomAt(x, y)) {
-                attempt.setBoomPoint(i+1);
-                return attempt;
-            }
-            i++;
-        }
-        return attempt;
-    }
+    }*/
 
 
 

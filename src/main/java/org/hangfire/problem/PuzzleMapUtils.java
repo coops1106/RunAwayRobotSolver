@@ -12,7 +12,7 @@ public class PuzzleMapUtils {
             try {
                 for (int x=0; x<=point.x; x++) {
                     for(int y=0; y<=point.y; y++) {
-                        condensedMap[x][y] = condensedMap[x][y] || puzzleMap.isBoomAt(x+(multiple*point.x), y+(multiple*point.y));
+                        condensedMap[x][y] = puzzleMap.isBoomAt(x+(multiple*point.x), y+(multiple*point.y)) || condensedMap[x][y];
                     }
                 }
             } catch (ArrayIndexOutOfBoundsException aioobe) {

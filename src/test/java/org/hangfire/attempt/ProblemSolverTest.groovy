@@ -1,22 +1,21 @@
-/*
+
 package org.hangfire.attempt
-import org.hangfire.problem.Problem
+import org.hangfire.RunAwayRobotTest
 import org.hangfire.problemSolver.ProblemSolver
-import org.junit.Test
-import spock.lang.Specification
 
-import static org.junit.Assert.assertEquals
-import static org.junit.Assert.assertTrue
+public class ProblemSolverTest extends RunAwayRobotTest {
 
-public class ProblemSolverTest extends Specification {
+	private ProblemSolver uut = new ProblemSolver();
 
-	private ProblemSolver uut;
-	private Problem problem;
+    def "test"() {
+        given:"A problem"
+            def problem = RunAwayRobotTest.PROBLEM_FACTORY.fetchProblemForLevel(1)
+        when:"I solve"
+            uut.solve(problem)
+        then:"I call problem utils"
 
-	def setup() {
-		problem = problemRepository.fetchStubProblemForLevel(8);
-		uut = new ProblemSolver(problem.getMaxInstructions());
-	}
+
+    }
 	
 	def givenAProblemAndASuccessfulPathWhenIAttemptToResolveThenIExpectToKnowTheProblemIsSolved() {
         given:
@@ -43,8 +42,9 @@ public class ProblemSolverTest extends Specification {
         then:
             true
 	}
-	
-	@Test
+
+}
+/*	@Test
 	public void givenAProblemWhenIInitializeAPathThenIExpectAPathOfRightDirectionsOfSizeMaxInstructions() {
 		ArrayList<Instruction> testPath = new ArrayList<Instruction>();
 		for (int i = 0; i < this.problem.getMaxInstructions(); i++) {
