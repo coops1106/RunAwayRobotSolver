@@ -1,4 +1,3 @@
-*.iml
 *.ipr
 *.iws
 *.class
@@ -14,4 +13,5 @@
 .idea
 
 classes
+bin
 build
