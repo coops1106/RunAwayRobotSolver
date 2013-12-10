@@ -1,12 +1,15 @@
 .idea
 *.iml
+*.ipr
+*.iws
 .classpath
 .metadata
 .project
 .settings
-bin
-build
 *.class
 *.jar
 *.war
 *.ear
+classes
+bin
+build
