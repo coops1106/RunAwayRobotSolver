@@ -6,6 +6,7 @@
 *.war
 *.ear
 
+.gradle
 .classpath
 .metadata
 .project
@@ -13,5 +14,4 @@
 .idea
 
 classes
-bin
 build
