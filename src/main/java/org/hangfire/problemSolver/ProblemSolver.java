@@ -6,7 +6,6 @@ import org.hangfire.attempt.AttemptOutcome;
 import org.hangfire.attempt.Instruction;
 import org.hangfire.problem.Problem;
 import org.hangfire.problem.PuzzleMap;
-import org.hangfire.problem.Tile;
 
 public class ProblemSolver {
 	
@@ -63,8 +62,8 @@ public class ProblemSolver {
                     break;
                 }
             }
-            Tile tile = puzzleMap.getTileAt(x, y);
-            if (tile.getStatus() == Tile.BLOCKED) {
+
+            if (puzzleMap.isBoomAt(x, y)) {
                 attempt.setBoomPoint(i+1);
                 return attempt;
             }

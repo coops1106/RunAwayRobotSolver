@@ -29,7 +29,7 @@ public class AttemptFactory {
         return attempt;
     }
 
-    protected static int getFirstRightPreBoomPoint(final Attempt originalAttempt) {
+    public static int getFirstRightPreBoomPoint(final Attempt originalAttempt) {
         int boomPoint = originalAttempt.getBoomPoint();
         while(boomPoint > 0) {
             boomPoint--;

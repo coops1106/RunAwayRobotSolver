@@ -5,11 +5,13 @@ class AttemptCheckerTest extends RunAwayRobotTest {
 
     private static final int LEVEL = 8
 
+    def AttemptChecker attemptChecker = new AttemptChecker()
+
     def "test"() {
         given:"A problem"
             def problem = PROBLEM_FACTORY.fetchProblemForLevel(LEVEL)
         when:"I check the result is correct"
-            def result = AttemptChecker.check(problem, attempt)
+            def result = attemptChecker.check(problem, attempt)
         then:
             result == expectedResult
         where:

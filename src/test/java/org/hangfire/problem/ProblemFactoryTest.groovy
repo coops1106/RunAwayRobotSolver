@@ -2,6 +2,7 @@ package org.hangfire.problem
 import org.hangfire.RunAwayRobotTest
 import org.hangfire.source.HttpSource
 import org.hangfire.source.StubSource
+import spock.lang.Ignore
 
 public class ProblemFactoryTest extends RunAwayRobotTest {
 	
@@ -18,7 +19,7 @@ public class ProblemFactoryTest extends RunAwayRobotTest {
             problem.mapSize == expectedMapSize
             problem.maxInstructions == expectedMaxInstructions
             problem.minInstructions == expectedMinInstructions
-            problem.puzzleMap == expectedPuzzleMap
+            problem.puzzleMap.equals(expectedPuzzleMap)
         where:
             level   | expectedMapSize   | expectedMaxInstructions   |   expectedMinInstructions |   expectedPuzzleMap
             1       | 3                 | 2                         |   2                       |   new PuzzleMap("..X...X..", 3)
@@ -29,9 +30,9 @@ public class ProblemFactoryTest extends RunAwayRobotTest {
             6       | 6                 | 4                         |   3                       |   new PuzzleMap("..XX..X..XX.X...X.......X.......X...", 6)
             7       | 6                 | 4                         |   3                       |   new PuzzleMap("..X.....X....X..........X....X....XX", 6)
             8       | 7                 | 4                         |   3                       |   new PuzzleMap(".X.X...............X.X...........X....X...X......", 7)
-
     }
 
+    @Ignore
     def "test with httpsource"() {
         given:
             uut = new ProblemFactory(new HttpSource())
