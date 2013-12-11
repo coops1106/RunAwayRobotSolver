@@ -24,8 +24,10 @@ public class ProblemSolver {
             for (Point point : startingPointsByInstructionLength.get(instructionLength)) {
                 PuzzleMap condensedPuzzleMap = PuzzleMapUtils.condensePuzzleMap(problem.getPuzzleMap(), point);
                 Attempt attempt = ATTEMPT_FACTORY.defaultAttemptOfSize(instructionLength);
-                attempt = ATTEMPT_CHECKER.check(condensedPuzzleMap, point, attempt);
-                System.out.println(attempt);
+                while (AttemptOutcome.SOLVED != attempt.getAttemptOutcome() || !attempt.isValid()) {
+                    attempt = ATTEMPT_FACTORY.createAlternativeAttempt(attempt);
+                    attempt = ATTEMPT_CHECKER.check(condensedPuzzleMap, point, attempt);
+                }
             }
         }
 /*

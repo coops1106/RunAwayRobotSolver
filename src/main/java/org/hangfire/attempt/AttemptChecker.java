@@ -13,7 +13,7 @@ public class AttemptChecker {
         if (puzzleMap.isBoomAt(point)) {
             System.out.println("Boom at " + point.x + "," + point.y);
             attempt.setBoomPoint(attempt.getSize());
-            attempt.setAttemptOutcome(AttemptOutcome.UNABLE_TO_SOLVE);
+            attempt.setAttemptOutcome(AttemptOutcome.INSTANT_BOOM);
         } else {
             for (int i=attempt.getSize(); i>0 ; i--) {
                 movePoint(point, attempt, instruction);
