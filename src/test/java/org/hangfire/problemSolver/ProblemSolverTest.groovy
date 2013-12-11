@@ -1,5 +1,6 @@
 package org.hangfire.problemSolver
 import org.hangfire.RunAwayRobotTest
+import static org.hangfire.attempt.Instruction.*
 
 class ProblemSolverTest extends RunAwayRobotTest {
 
@@ -14,16 +15,12 @@ class ProblemSolverTest extends RunAwayRobotTest {
         def problem = theProblem
         when: "I solve"
         def attempt = uut.solve(problem)
+        println attempt
         then:
-        true
+        attempt.instructions
         where:
         theProblem | theSolution
-        //PROBLEM_FACTORY.fetchProblemForLevel(1) | [RIGHT, DOWN]
-        //PROBLEM_FACTORY.fetchProblemForLevel(2) | [RIGHT, DOWN, DOWN]
-        //PROBLEM_FACTORY.fetchProblemForLevel(3) | [RIGHT, DOWN]
-        //PROBLEM_FACTORY.fetchProblemForLevel(4) | [DOWN, DOWN, RIGHT]
-        //PROBLEM_FACTORY.fetchProblemForLevel(1) |   ""
-        //PROBLEM_FACTORY.fetchProblemForLevel(2) |   ""
-        PROBLEM_FACTORY.fetchProblemForLevel(3) |   ""
+        PROBLEM_FACTORY.fetchProblemForLevel(1) |   [LEFT, UP]
+        //PROBLEM_FACTORY.fetchProblemForLevel(2) | [LEFT, UP]
     }
 }

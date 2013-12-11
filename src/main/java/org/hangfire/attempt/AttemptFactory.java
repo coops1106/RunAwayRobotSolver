@@ -13,7 +13,6 @@ public class AttemptFactory {
         }
         attempt.setInstructions(instructions);
         attempt.setValid(true);
-        attempt.setAttemptOutcome(AttemptOutcome.NOT_YET_KNOWN);
         return attempt;
     }
 
@@ -48,15 +47,5 @@ public class AttemptFactory {
         while(instructions.size() < size) {
             instructions.add(0, Instruction.UP);
         }
-    }
-
-    private static List<Instruction> changeInstructions(final List<Instruction> instructions) throws ArrayIndexOutOfBoundsException {
-        int i = instructions.size() -1;
-        while(instructions.get(i) == Instruction.UP) {
-            i--;
-        }
-        List<Instruction> changedInstructions = instructions.subList(0, i);
-        changedInstructions.add(Instruction.UP);
-        return changedInstructions;
     }
 }

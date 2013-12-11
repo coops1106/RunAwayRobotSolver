@@ -8,6 +8,10 @@ public class Attempt {
     private int boomPoint = -1;
     private AttemptOutcome attemptOutcome = AttemptOutcome.UNABLE_TO_SOLVE;
 
+    public Attempt() {
+        this.attemptOutcome = AttemptOutcome.NOT_YET_KNOWN;
+    }
+
     public int getSize() {
         return this.instructions.size();
     }

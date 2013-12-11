@@ -16,17 +16,22 @@ public class ProblemSolver {
     private static final AttemptFactory ATTEMPT_FACTORY = new AttemptFactory();
     private static final AttemptChecker ATTEMPT_CHECKER = new AttemptChecker();
 
-    public void solve(final Problem problem) {
+    public Attempt solve(final Problem problem) {
 
+        Attempt solution = null;
         Map<Integer, List<Point>> startingPointsByInstructionLength = ProblemUtils.fetchStartingPoints(problem);
 
         for (Integer instructionLength : startingPointsByInstructionLength.keySet()) {
             for (Point point : startingPointsByInstructionLength.get(instructionLength)) {
                 PuzzleMap condensedPuzzleMap = PuzzleMapUtils.condensePuzzleMap(problem.getPuzzleMap(), point);
                 Attempt attempt = ATTEMPT_FACTORY.defaultAttemptOfSize(instructionLength);
-                while (AttemptOutcome.SOLVED != attempt.getAttemptOutcome() || !attempt.isValid()) {
+                attempt = ATTEMPT_CHECKER.check(condensedPuzzleMap, point, attempt);
+                while (AttemptOutcome.SOLVED != attempt.getAttemptOutcome() && attempt.isValid() && attempt.getAttemptOutcome() != AttemptOutcome.INSTANT_BOOM ) {
                     attempt = ATTEMPT_FACTORY.createAlternativeAttempt(attempt);
                     attempt = ATTEMPT_CHECKER.check(condensedPuzzleMap, point, attempt);
+                }
+                if (AttemptOutcome.SOLVED == attempt.getAttemptOutcome()) {
+                    solution = attempt;
                 }
             }
         }
@@ -42,8 +47,8 @@ public class ProblemSolver {
             if(attempt.getAttemptOutcome() == AttemptOutcome.SOLVED) {
                 break;
             }
-        }
-        return attempt;*/
+        }      */
+        return solution;
     }
 
 /*    private Attempt attemptSolutionForSize(final int instructionSize) {
