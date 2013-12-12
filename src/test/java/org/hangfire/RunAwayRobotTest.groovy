@@ -2,6 +2,7 @@ package org.hangfire
 
 import org.hangfire.attempt.AttemptFactory
 import org.hangfire.problem.ProblemFactory
+import org.hangfire.source.HttpSource
 import org.hangfire.source.StubSource
 import spock.lang.Specification
 

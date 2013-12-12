@@ -10,7 +10,7 @@ public class AttemptChecker {
         int instruction = attempt.getSize() -1;
 
         if (puzzleMap.isBoomAt(checkPoint)) {
-            System.out.println("Boom at " + checkPoint.x + "," + checkPoint.y);
+            //System.out.println("Boom at " + checkPoint.x + "," + checkPoint.y);
             attempt.setBoomPoint(attempt.getSize());
             attempt.setAttemptOutcome(AttemptOutcome.INSTANT_BOOM);
         } else {
@@ -26,7 +26,7 @@ public class AttemptChecker {
                     break;
                 }
                 if (puzzleMap.isBoomAt(checkPoint)) {
-                    System.out.println("Boom at " + checkPoint.x + "," + checkPoint.y + " by instruction " + i);
+                    //System.out.println("Boom at " + checkPoint.x + "," + checkPoint.y + " by instruction " + i);
                     attempt.setBoomPoint(i);
                     attempt.setAttemptOutcome(AttemptOutcome.UNABLE_TO_SOLVE);
                     break;

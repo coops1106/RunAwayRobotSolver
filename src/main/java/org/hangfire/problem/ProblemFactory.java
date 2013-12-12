@@ -13,4 +13,8 @@ public class ProblemFactory {
     public Problem fetchProblemForLevel(final int level) {
 		return new Problem(this.source.retrieveData(level));
 	}
+
+    public Problem fetchProblem() {
+		return new Problem(this.source.retrieveData());
+	}
 }
