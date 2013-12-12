@@ -6,7 +6,8 @@ import java.awt.*;
 
 public class AttemptChecker {
     public Attempt check(final PuzzleMap puzzleMap, final Point point, final Attempt attempt) {
-        System.out.println("Checking attempt :" + attempt);
+        System.out.println("Checking attempt:" + attempt);
+        System.out.println("For condensed map:" + puzzleMap);
         Point checkPoint = new Point(point);
         int instruction = attempt.getSize() -1;
 

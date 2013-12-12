@@ -9,7 +9,6 @@ import java.util.Map;
 public class ProblemUtils {
 
     public static Map<Integer, List<Point>> fetchStartingPoints(final Problem problem) {
-        System.out.println("Fetching starting points for level " + problem.getLevel());
         Map<Integer, List<Point>> startingPoints = new HashMap<Integer, List<Point>>();
         for (int i=problem.getMinInstructions(); i<=problem.getMaxInstructions(); i++) {
             System.out.println("Starting points for instructions of length " + i);

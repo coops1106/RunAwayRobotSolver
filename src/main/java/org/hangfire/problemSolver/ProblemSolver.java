@@ -25,15 +25,16 @@ public class ProblemSolver {
             for (Point point : startingPointsByInstructionLength.get(instructionLength)) {
                 PuzzleMap condensedPuzzleMap = PuzzleMapUtils.condensePuzzleMap(problem.getPuzzleMap(), point);
                 Attempt attempt = ATTEMPT_FACTORY.defaultAttemptOfSize(instructionLength);
-                attempt = ATTEMPT_CHECKER.check(condensedPuzzleMap, point, attempt);
                 while (AttemptOutcome.SOLVED != attempt.getAttemptOutcome() && attempt.isValid() && attempt.getAttemptOutcome() != AttemptOutcome.INSTANT_BOOM ) {
-                    attempt = ATTEMPT_FACTORY.createAlternativeAttempt(attempt);
                     attempt = ATTEMPT_CHECKER.check(condensedPuzzleMap, point, attempt);
-                }
-                if (AttemptOutcome.SOLVED == attempt.getAttemptOutcome()) {
-                    solution = attempt;
+                    if (AttemptOutcome.SOLVED == attempt.getAttemptOutcome()) {
+                        solution = attempt;
+                        break;
+                    }
+                    attempt = ATTEMPT_FACTORY.createAlternativeAttempt(attempt);
                 }
             }
+            System.out.println("No solutions found for instruction length:" + instructionLength);
         }
 /*
         this.puzzleMap = problem.getPuzzleMap();
