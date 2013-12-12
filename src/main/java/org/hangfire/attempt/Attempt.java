@@ -25,7 +25,6 @@ public class Attempt {
     }
 
     public void setBoomPoint(final int boomPoint) {
-        System.out.println("Setting Boom Point : " + boomPoint);
         this.boomPoint = boomPoint;
     }
 

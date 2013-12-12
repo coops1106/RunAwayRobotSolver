@@ -23,13 +23,15 @@ public class ProblemSolver {
 
         for (Integer instructionLength : startingPointsByInstructionLength.keySet()) {
             for (Point point : startingPointsByInstructionLength.get(instructionLength)) {
+                System.out.println("\nStarting point:" + point);
                 PuzzleMap condensedPuzzleMap = PuzzleMapUtils.condensePuzzleMap(problem.getPuzzleMap(), point);
+                System.out.println("Condensed map:" + condensedPuzzleMap);
                 Attempt attempt = ATTEMPT_FACTORY.defaultAttemptOfSize(instructionLength);
                 while (AttemptOutcome.SOLVED != attempt.getAttemptOutcome() && attempt.isValid() && attempt.getAttemptOutcome() != AttemptOutcome.INSTANT_BOOM ) {
                     attempt = ATTEMPT_CHECKER.check(condensedPuzzleMap, point, attempt);
+                    System.out.println("Attempt outcome:" + attempt);
                     if (AttemptOutcome.SOLVED == attempt.getAttemptOutcome()) {
-                        solution = attempt;
-                        break;
+                        return attempt;
                     }
                     attempt = ATTEMPT_FACTORY.createAlternativeAttempt(attempt);
                 }
