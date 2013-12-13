@@ -19,23 +19,29 @@ class ProblemSolverTest extends RunAwayRobotTest {
     def test() {
         given: "Problems"
         def problem = theProblem
-        println problem
+        println problem.fullMap
+        println problem.puzzleMap
+        println problem.mapSize
         when: "I solve"
+        def startTime = System.currentTimeMillis()
         def attempt = uut.solve(problem)
+        def endTime = System.currentTimeMillis()
+        def totalTime = endTime - startTime
+        println(totalTime)
         println AttemptUtils.parseAttempt(attempt)
         then:
         attempt.instructions == theSolution
         where:
         theProblem                              | theSolution
-        /*PROBLEM_FACTORY.fetchProblemForLevel(1) | [LEFT, UP]
-        PROBLEM_FACTORY.fetchProblemForLevel(2) | [LEFT, UP, UP]
-        PROBLEM_FACTORY.fetchProblemForLevel(3) | [LEFT, UP]
-        PROBLEM_FACTORY.fetchProblemForLevel(4) | [UP, UP, LEFT]
-        PROBLEM_FACTORY.fetchProblemForLevel(5) | [LEFT, UP]
-        PROBLEM_FACTORY.fetchProblemForLevel(6) | [LEFT, UP, UP]
-        PROBLEM_FACTORY.fetchProblemForLevel(7) | [UP, UP, UP, LEFT]*/
-        //PROBLEM_FACTORY.fetchProblemForLevel(91) | [UP, UP, LEFT, UP, LEFT, UP, UP, UP, LEFT, UP, UP, LEFT, UP, UP, LEFT, LEFT, UP, UP, UP, LEFT, UP, UP, UP]
-        PROBLEM_FACTORY.fetchProblemForLevel(96) | [UP, UP, LEFT, UP, LEFT, UP, UP, UP, LEFT, UP, UP, LEFT, UP, UP, LEFT, LEFT, UP, UP, UP, LEFT, UP, UP, UP]
+        //PROBLEM_FACTORY.fetchProblemForLevel(1) | [LEFT, UP]
+        //PROBLEM_FACTORY.fetchProblemForLevel(2) | [LEFT, UP, UP]
+        //PROBLEM_FACTORY.fetchProblemForLevel(3) | [LEFT, UP]
+        //PROBLEM_FACTORY.fetchProblemForLevel(4) | [UP, UP, LEFT]
+        //PROBLEM_FACTORY.fetchProblemForLevel(5) | [LEFT, UP]
+        //PROBLEM_FACTORY.fetchProblemForLevel(6) | [LEFT, UP, UP]
+        //PROBLEM_FACTORY.fetchProblemForLevel(7) | [UP, UP, UP, LEFT]
+        PROBLEM_FACTORY.fetchProblemForLevel(91) | [UP, UP, UP, UP, UP, LEFT, UP, UP, UP, LEFT, LEFT, UP, UP, UP, LEFT, LEFT, LEFT, LEFT, LEFT, UP, UP, UP, UP, UP, LEFT, LEFT]
+       // PROBLEM_FACTORY.fetchProblemForLevel(96) | [LEFT, LEFT, UP, UP, LEFT, UP, LEFT, LEFT, UP, UP, UP, LEFT, UP, UP, UP, UP, LEFT, UP, UP, UP, LEFT, UP, LEFT, LEFT]
     }
 
     def "Live test"() {
