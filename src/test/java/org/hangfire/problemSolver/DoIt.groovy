@@ -9,7 +9,7 @@ class DoIt extends RunAwayRobotTest{
 
     def DoItNow () {
         given:
-        def int level = 98
+        def int level = 501
         def liveProblemFactory = new ProblemFactory(new HttpSource())
         def ProblemSolver problemSolver = new ProblemSolver()
         when:

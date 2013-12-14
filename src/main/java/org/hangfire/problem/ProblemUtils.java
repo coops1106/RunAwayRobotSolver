@@ -12,9 +12,11 @@ public class ProblemUtils {
         Map<Integer, List<Point>> startingPoints = new TreeMap<Integer, List<Point>>();
         for (int i=problem.getMinInstructions(); i<=problem.getMaxInstructions(); i++) {
             List<Point> points = new ArrayList<Point>();
-            for (int j=1; j<=i; j++) {
-                Point point = new Point(i-j, j);
-                points.add(point);
+            for (int j= (int) (i/2.5); j<=i; j++) {
+                if(i-j >= (i/2.5)) {
+                    Point point = new Point(i-j, j);
+                    points.add(point);
+                }
             }
             startingPoints.put(i, points);
         }

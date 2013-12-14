@@ -3,6 +3,7 @@ package org.hangfire.problemSolver
 import org.hangfire.RunAwayRobotTest
 import org.hangfire.attempt.AttemptUtils
 import org.hangfire.problem.ProblemFactory
+import org.hangfire.source.FileSource
 import org.hangfire.source.HttpSource
 
 import static org.hangfire.attempt.Instruction.LEFT
@@ -46,8 +47,8 @@ class ProblemSolverTest extends RunAwayRobotTest {
 
     def "Live test"() {
         given: "A real problem"
-        def liveProblemFactory = new ProblemFactory(new HttpSource())
-        def problem = liveProblemFactory.fetchProblemForLevel(104)
+        def liveProblemFactory = new ProblemFactory(new FileSource())
+        def problem = liveProblemFactory.fetchProblemForLevel(513)
         println problem
         when: "I solve"
         def attempt = uut.solve(problem)
